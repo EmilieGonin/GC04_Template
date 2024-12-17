@@ -17,26 +17,7 @@ FetchContent_MakeAvailable(SFML)
 add_executable(${PROJECT_NAME})
 file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS "src/*.cpp")
 file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS "src/*.h")
-target_sources(${PROJECT_NAME} PRIVATE ${SOURCE_FILES} ${HEADER_FILES} 
-"src/Component/Collider/CircleCollider.cpp" 
-"src/Component/Collider/CircleCollider.h" 
-"src/Component/Collider/Collider.h" 
-"src/Component/Collider/RectCollider.cpp" 
-"src/Component/Collider/RectCollider.h" 
-"src/Component/Draw/ADrawable.h" 
-"src/Component/Draw/DrawableSFML.h" 
-"src/Component/Draw/SpriteRenderer.cpp"
-"src/Component/Draw/SpriteRenderer.h"
-"src/Component/Draw/TextRenderer.cpp"
-"src/Component/Draw/TextRenderer.h"  
-"src/Component/Transform/ATransform.h" 
-"src/Component/Transform/TransformSFML.cpp" 
-"src/Component/Transform/TransformSFML.h" 
-"src/Component/AComponent.h" 
-"src/Component/ColliderSystem.cpp"
-"src/Component/ColliderSystem.h" 
-"src/GameObject.cpp" 
-"src/GameObject.h" )
+target_sources(${PROJECT_NAME} PRIVATE ${SOURCE_FILES} ${HEADER_FILES} )
 
 # Multi-processor compilation
 if (MSVC)
