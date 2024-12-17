@@ -1,11 +1,14 @@
 #include "GameObject.h"
 
-void GameObject::addComponent(std::shared_ptr<AComponent> component)
+void GameObject::addComponent(const std::shared_ptr<AComponent>& component)
 {
-
+	components.push_back(component);
 }
 
 void GameObject::update()
 {
-
+	for (auto component : components)
+	{
+		component->update();
+	}
 }

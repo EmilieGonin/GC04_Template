@@ -4,6 +4,7 @@
 
 class Window;
 class EventSystem;
+class Scene;
 
 class App
 {
@@ -15,7 +16,7 @@ public:
 private:
 	std::unique_ptr<sf::RenderWindow> m_window;
 	std::shared_ptr<EventSystem> m_eventSystem;
-
+	std::shared_ptr<Scene> m_scene;
 	
 	void Init();
 	void RegisterForEvent();

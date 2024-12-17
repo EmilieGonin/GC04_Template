@@ -3,6 +3,7 @@
 #include "App.h"
 #include "Window.h"
 #include "EventSystem.h"
+#include "Scene.h"
 
 using namespace std::placeholders;
 
@@ -34,7 +35,6 @@ void App::Init()
 	m_eventSystem = std::shared_ptr<EventSystem>(new EventSystem());
 
 	m_window->create(sf::VideoMode({ 1600u, 900u }), "GC04_Template");
-	std::cout << "App created" << std::endl;
 	m_window->setFramerateLimit(144u);
 
 	RegisterForEvent();
@@ -50,11 +50,13 @@ void App::RegisterForEvent()
 
 void App::Update()
 {
+	m_scene->Update();
 }
 
 void App::Draw()
 {
 	m_window->clear();
+	m_window->draw(*m_scene);
 	m_window->display();
 }
 

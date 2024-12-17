@@ -6,7 +6,7 @@ class GameObject
 {
 
 public:
-    void addComponent(std::shared_ptr<AComponent> component);
+    void addComponent(const std::shared_ptr<AComponent>& component);
     void update();
 
 private:
