@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
 project(GC04_Template LANGUAGES CXX)
-set(CXX_STANDARD_REQUIRED 17)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
@@ -18,6 +17,17 @@ add_executable(${PROJECT_NAME})
 file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS "src/*.cpp")
 file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS "src/*.h")
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCE_FILES} ${HEADER_FILES} )
+
+set(RESOURCE_DIR ${CMAKE_SOURCE_DIR}/resources)
+if (NOT EXISTS ${RESOURCE_DIR})
+    file(MAKE_DIRECTORY ${RESOURCE_DIR})
+endif()
+
+add_custom_command(
+    TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${RESOURCE_DIR} $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources
+)
 
 # Multi-processor compilation
 if (MSVC)
