@@ -2,14 +2,18 @@
 #include <windows.h>
 #include <iostream>
 
-class AssetManager
-{
-public:
-	AssetManager();
+#include "Singleton.h"
 
-	sf::Font GetFont() const { return _font; }
+class AssetManager : public Singleton<AssetManager> {
+public:
+    sf::Font GetFont() const { return _font; }
 
 private:
-	const std::string _resPath = "resources/";
-	sf::Font _font;
+    AssetManager();
+    ~AssetManager() = default;
+
+    friend class Singleton<AssetManager>;
+
+    const std::string _resPath = "resources/";
+    sf::Font _font;
 };
