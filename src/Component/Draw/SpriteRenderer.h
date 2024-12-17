@@ -5,10 +5,11 @@ class SpriteRenderer : public DrawableSFML
 {
 
 public:
-    void draw() override;
+    void SetTexture(const sf::Texture& texture);
+    void Draw() override;
 
 private:
-    sf::Sprite sprite;
+    sf::Sprite m_sprite;
 
 };
 

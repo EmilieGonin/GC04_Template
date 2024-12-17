@@ -4,6 +4,6 @@ class ATransform : public AComponent
 {
 
 public:
-    virtual void setPosition(float x, float y) = 0;
+    virtual void SetPosition(float x, float y) = 0;
 
 };

@@ -5,11 +5,11 @@ class TextRenderer : public DrawableSFML
 {
 
 public:
-    void draw() override;
-    void setText(const std::string& text);
+    void Draw() override;
+    void SetText(const std::string& text, const sf::Font& font, unsigned int size);
 
 private:
-    sf::Text text;
+    sf::Text m_text;
 
 };
 

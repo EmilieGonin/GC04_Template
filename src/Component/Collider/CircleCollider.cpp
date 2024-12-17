@@ -1,6 +1,6 @@
 #include "CircleCollider.h"
 
-bool CircleCollider::checkCollision(const Collider& other)
+bool CircleCollider::CheckCollision(const Collider& other)
 {
 	return false;
 }

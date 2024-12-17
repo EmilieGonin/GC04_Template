@@ -37,6 +37,8 @@ void App::Init()
 	m_window->create(sf::VideoMode({ 1600u, 900u }), "GC04_Template");
 	m_window->setFramerateLimit(144u);
 
+	m_scene = std::shared_ptr<Scene>(new Scene());
+
 	RegisterForEvent();
 }
 

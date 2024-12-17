@@ -6,11 +6,11 @@ class ColliderSystem
 {
 
 public:
-    void addCollider(std::shared_ptr<Collider> collider);
-    void checkCollisions();
+    void AddCollider(std::shared_ptr<Collider> collider);
+    void CheckCollisions();
 
 private:
-    std::vector<std::shared_ptr<Collider>> colliders;
+    std::vector<std::shared_ptr<Collider>> m_colliders;
 
 };
 

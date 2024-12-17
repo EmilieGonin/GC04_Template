@@ -2,11 +2,15 @@
 
 
 
+Scene::Scene() : _gos()
+{
+}
+
 void Scene::Update()
 {
 	for (auto gameObject : _gos)
 	{
-		gameObject->update();
+		gameObject->Update();
 	}
 }
 

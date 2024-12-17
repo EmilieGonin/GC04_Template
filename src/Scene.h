@@ -7,6 +7,7 @@ class Scene : public sf::Drawable
 {
 
 public:
+	Scene();
 	void Update();
 private:
 	std::vector<std::shared_ptr<GameObject>> _gos;

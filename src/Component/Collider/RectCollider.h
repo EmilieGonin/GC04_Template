@@ -4,8 +4,8 @@ class RectCollider : public Collider
 {
 
 public:
-    bool checkCollision(const Collider& other) override;
+    bool CheckCollision(const Collider& other) override;
 
 private:
-    float width, height;
+    float m_width, m_height;
 };

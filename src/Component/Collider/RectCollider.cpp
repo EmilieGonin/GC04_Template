@@ -1,6 +1,6 @@
 #include "RectCollider.h"
 
-bool RectCollider::checkCollision(const Collider& other)
+bool RectCollider::CheckCollision(const Collider& other)
 {
 	return false;
 }
