@@ -6,10 +6,11 @@ class GameObject
 {
 
 public:
-    void addComponent(std::shared_ptr<AComponent> component);
-    void update();
+    void AddComponent(std::shared_ptr<AComponent> component);
+    void RemoveComponent(std::shared_ptr<AComponent> component);
+    void Update();
 
 private:
-    std::vector<std::shared_ptr<AComponent>> components;
+    std::vector<std::shared_ptr<AComponent>> m_components;
 
 };

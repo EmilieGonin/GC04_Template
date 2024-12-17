@@ -4,6 +4,6 @@ class DrawableSFML : public ADrawable
 {
 
 public:
-    virtual void draw() override = 0;
+    virtual void Draw() override = 0;
 
 };

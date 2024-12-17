@@ -4,8 +4,8 @@ class Collider : public AComponent
 {
 
 public:
-    virtual bool checkCollision(const Collider& other) = 0;
+    virtual bool CheckCollision(const Collider& other) = 0;
 
 private:
-    float radius;
+    float m_radius;
 };
