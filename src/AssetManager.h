@@ -4,7 +4,8 @@
 
 #include "Singleton.h"
 
-class AssetManager : public Singleton<AssetManager> {
+class AssetManager : public Singleton<AssetManager>
+{
 public:
     sf::Font GetFont() const { return _font; }
 
