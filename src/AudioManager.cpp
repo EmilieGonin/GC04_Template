@@ -2,8 +2,8 @@
 
 AudioManager::AudioManager()
 {
-	if (_buffer.loadFromFile())
-	{
-		//
-	}
+	//if (_buffer.loadFromFile())
+	//{
+	//	//
+	//}
 }
