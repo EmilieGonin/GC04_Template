@@ -12,6 +12,7 @@ public:
 
     void SetTexture(const sf::Texture& texture);
     void SetPosition(const sf::Vector2f& postion);
+    void SetOrigin(const sf::Vector2f& origin);
     void SetScale(const sf::Vector2f& windowSize);
 
     // Hérité via Drawable
@@ -21,7 +22,6 @@ protected:
 
 private:
     std::shared_ptr<sf::Sprite> m_sprite;
-    sf::Vector2f m_position;
 
 };
 

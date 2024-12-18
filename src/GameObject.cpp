@@ -45,13 +45,13 @@ void GameObject::Update()
 	}
 }
 
-void GameObject::SetSize(const sf::Vector2f& windowSize)
+void GameObject::SetSize(const sf::Vector2f& ratioWindow)
 {
     std::shared_ptr<ATransform> transform = GetComponent<ATransform>();
 
     if (transform) 
     {
-        //transform->SetWorldScale(windowSize);
+        transform->SetScale(ratioWindow.x, ratioWindow.y);
     }
 }
 

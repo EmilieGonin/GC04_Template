@@ -18,8 +18,8 @@ void BackgroundBehaviour::Init(const sf::Vector2f& windowSize)
 	const sf::Texture& backgroundImage = AssetManager::GetInstance().GetTexture(SpriteType::BACKGROUND);
 	spriteRenderer->SetTexture(backgroundImage);
 
-	sf::Vector2f origin = sf::Vector2f(0, 0);
-	spriteRenderer->SetPosition(origin);
+	//sf::Vector2f origin = sf::Vector2f(0, 0);
+	//spriteRenderer->SetPosition(origin);
 
 	spriteRenderer->SetScale(windowSize);
 }

@@ -3,8 +3,7 @@
 #include <memory>
 
 
-SpriteRenderer::SpriteRenderer() : 
-    m_position(0, 0),
+SpriteRenderer::SpriteRenderer() :
     m_sprite()
 {
 
@@ -31,11 +30,17 @@ void SpriteRenderer::SetTexture(const sf::Texture& texture)
 
 void SpriteRenderer::SetPosition(const sf::Vector2f& position)
 {
-    m_position = position;
-
     if (m_sprite) 
     {
         m_sprite->setPosition(position);
+    }
+}
+
+void SpriteRenderer::SetOrigin(const sf::Vector2f& origin)
+{
+    if (m_sprite) 
+    {
+        m_sprite->setOrigin(origin);
     }
 }
 

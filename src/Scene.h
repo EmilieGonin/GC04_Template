@@ -13,7 +13,7 @@ public:
 	Scene();
 	void InitBackground(const sf::Vector2f& windowSize);
 	void Update();
-	void SetSize(const sf::Vector2f& windowSize);
+	void SetSize(const sf::Vector2f& ratioWindow);
 
 private:
 	std::shared_ptr<sf::RenderWindow> m_window;

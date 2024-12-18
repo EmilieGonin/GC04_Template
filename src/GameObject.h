@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vector>
 #include <memory>
 #include "Component/AComponent.h"
@@ -12,7 +13,7 @@ public:
     void AddComponent(std::shared_ptr<AComponent> component);
     void RemoveComponent(std::shared_ptr<AComponent> component);
     void Update();
-    void SetSize(const sf::Vector2f& windowSize);
+    void SetSize(const sf::Vector2f& ratioWindow);
 
     template<typename T>
     std::shared_ptr<T> GetComponent();

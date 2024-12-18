@@ -19,11 +19,12 @@ void Scene::InitBackground(const sf::Vector2f& windowSize)
 {
 	std::shared_ptr<GameObject> background = std::shared_ptr<GameObject>(new GameObject());
 
-	std::shared_ptr<SpriteRenderer> spriteRenderer = std::shared_ptr<SpriteRenderer>(new SpriteRenderer());
-	background->AddComponent(spriteRenderer);
-
 	std::shared_ptr<BackgroundBehaviour> backgroundBehaviour = std::shared_ptr<BackgroundBehaviour>(new BackgroundBehaviour());
+	std::shared_ptr<SpriteRenderer> spriteRenderer = std::shared_ptr<SpriteRenderer>(new SpriteRenderer());
+	
+	background->AddComponent(spriteRenderer);
 	background->AddComponent(backgroundBehaviour);
+
 	backgroundBehaviour->Init(windowSize);
 	_gos.push_back(background);
 }
@@ -36,11 +37,11 @@ void Scene::Update()
 	}
 }
 
-void Scene::SetSize(const sf::Vector2f& windowSize)
+void Scene::SetSize(const sf::Vector2f& ratioWindow)
 {
 	for (auto gameObject : _gos)
 	{
-		gameObject->SetSize(windowSize);
+		gameObject->SetSize(ratioWindow);
 	}
 }
 
