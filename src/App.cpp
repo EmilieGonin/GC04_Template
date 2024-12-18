@@ -3,10 +3,11 @@
 #include "App.h"
 #include "Window.h"
 #include "EventSystem.h"
+#include "AssetManager.h"
 
 using namespace std::placeholders;
 
-App::App()
+App::App() : m_assetManager(AssetManager::GetInstance())
 {
 }
 
