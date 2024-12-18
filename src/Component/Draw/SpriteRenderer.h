@@ -1,3 +1,5 @@
+#pragma once
+
 #include "DrawableSFML.h"
 #include <SFML/Graphics/Sprite.hpp>
 
@@ -10,6 +12,7 @@ public:
 
     void SetTexture(const sf::Texture& texture);
     void SetPosition(const sf::Vector2f& postion);
+    void SetScale(const sf::Vector2f& windowSize);
 
     // Hérité via Drawable
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
