@@ -1,3 +1,4 @@
+#pragma once
 #include "ADrawable.h"
 #include <SFML/Graphics.hpp>
 

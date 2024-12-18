@@ -5,7 +5,7 @@
 
 SpriteRenderer::SpriteRenderer() : 
     m_position(0, 0),
-    m_sprite(nullptr)
+    m_sprite()
 {
 
 }

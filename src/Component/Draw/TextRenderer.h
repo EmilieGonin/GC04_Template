@@ -1,3 +1,4 @@
+#pragma once
 #include "DrawableSFML.h"
 #include <SFML/Graphics/Text.hpp>
 
