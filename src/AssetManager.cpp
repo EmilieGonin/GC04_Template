@@ -1,16 +1,41 @@
 #include "AssetManager.h"
 
-std::string AssetManager::GetSpritePath(SpriteType type)
+std::shared_ptr<sf::Texture> AssetManager::GetTexture(TextureType type)
 {
-	auto it = _spritesPath.find(type);
-	if (it != _spritesPath.end()) return it->second;
-	return std::string();
+	auto it = m_textures.find(type);
+	if (it != m_textures.end()) return it->second;
+	return nullptr;
 }
 
 AssetManager::AssetManager()
 {
-	if (!_font.openFromFile(_resPath + "Roboto-Regular.ttf"))
+	if (!m_font.openFromFile(m_resPath + m_mainFont))
 	{
-		std::cerr << "Can't open font from file." << std::endl;
+		std::cerr << "[" << m_mainFont << "] Font not loaded." << std::endl;
+	}
+	else std::cout << "[" << m_mainFont << "] Font loaded." << std::endl;
+
+	LoadTextures();
+}
+
+std::string AssetManager::GetPath(TextureType type)
+{
+	auto it = m_texturesPath.find(type);
+	if (it != m_texturesPath.end()) return it->second;
+	return std::string();
+}
+
+void AssetManager::LoadTextures()
+{
+	for (auto& sprite : m_texturesPath)
+	{
+		auto texture = std::make_shared<sf::Texture>();
+		std::string path = m_resPath + sprite.second;
+
+		if (!texture->loadFromFile(path))
+		{
+			std::cerr << "Texture not loaded at path : " << path << std::endl;
+		}
+		else std::cout << "Texture loaded at path " << path << std::endl;
 	}
 }
