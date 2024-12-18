@@ -9,10 +9,11 @@ std::shared_ptr<sf::Texture> AssetManager::GetTexture(TextureType type)
 
 AssetManager::AssetManager()
 {
-	if (!m_font.openFromFile(m_resPath + "Roboto-Regular.ttf"))
+	if (!m_font.openFromFile(m_resPath + m_mainFont))
 	{
-		std::cerr << "Can't open font from file." << std::endl;
+		std::cerr << "[" << m_mainFont << "] Font not loaded." << std::endl;
 	}
+	else std::cout << "[" << m_mainFont << "] Font loaded." << std::endl;
 
 	LoadTextures();
 }

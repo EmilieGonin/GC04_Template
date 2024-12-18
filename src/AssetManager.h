@@ -28,6 +28,7 @@ private:
     friend class Singleton<AssetManager>;
 
     const std::string m_resPath = "resources/";
+    const std::string m_mainFont = "Roboto-Regular.ttf";
     const std::map<TextureType, std::string> m_texturesPath =
     {
         { TextureType::BALL, "sprites/ball.png" },
