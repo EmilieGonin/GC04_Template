@@ -5,7 +5,8 @@ class TransformSFML : public ATransform
 {
 
 public:
-    void SetPosition(float x, float y) override;
+    virtual void SetPosition(float x, float y) override;
+    virtual void Update() override;
     //const sf::Vector2f& getPosition();
 
 private:

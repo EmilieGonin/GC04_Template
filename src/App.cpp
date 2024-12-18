@@ -1,6 +1,9 @@
+#pragma once
+
 #include <iostream>
 
 #include "App.h"
+#include "AssetManager.h"
 #include "Window.h"
 #include "EventSystem.h"
 #include "Scene.h"
@@ -31,15 +34,23 @@ void App::Run()
 
 void App::Init()
 {
-	m_window = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow());
+	AssetManager::GetInstance().LoadAssets();
+
+	m_window = std::make_unique<sf::RenderWindow>(sf::VideoMode({ 1600u, 900u }), "GC04_Template");
 	m_eventSystem = std::shared_ptr<EventSystem>(new EventSystem());
 
-	m_window->create(sf::VideoMode({ 1600u, 900u }), "GC04_Template");
 	m_window->setFramerateLimit(144u);
 
-	m_scene = std::shared_ptr<Scene>(new Scene());
+	InitScene();
 
 	RegisterForEvent();
+}
+
+void App::InitScene()
+{
+	m_scene = std::shared_ptr<Scene>(new Scene());
+	m_scene->Init(std::shared_ptr<sf::RenderWindow>(m_window.get(), [](sf::RenderWindow*) {}));
+	m_scene->InitBackground();
 }
 
 void App::RegisterForEvent()

@@ -16,7 +16,7 @@ FetchContent_MakeAvailable(SFML)
 add_executable(${PROJECT_NAME})
 file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS "src/*.cpp")
 file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS "src/*.h")
-target_sources(${PROJECT_NAME} PRIVATE ${SOURCE_FILES} ${HEADER_FILES} )
+target_sources(${PROJECT_NAME} PRIVATE ${SOURCE_FILES} ${HEADER_FILES}  "src/Component/Draw/ADrawable.cpp")
 
 set(RESOURCE_DIR ${CMAKE_SOURCE_DIR}/resources)
 if (NOT EXISTS ${RESOURCE_DIR})

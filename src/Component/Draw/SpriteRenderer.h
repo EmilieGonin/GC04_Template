@@ -5,11 +5,20 @@ class SpriteRenderer : public DrawableSFML
 {
 
 public:
+    SpriteRenderer();
+    ~SpriteRenderer();
+
     void SetTexture(const sf::Texture& texture);
-    void Draw() override;
+    void SetPosition(const sf::Vector2f& postion);
+
+    // Hérité via Drawable
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+protected:
 
 private:
-    sf::Sprite m_sprite;
+    std::shared_ptr<sf::Sprite> m_sprite;
+    sf::Vector2f m_position;
 
 };
 

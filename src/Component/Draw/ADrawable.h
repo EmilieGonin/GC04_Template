@@ -1,9 +1,9 @@
 #include "..\AComponent.h"
 
-class ADrawable : public AComponent 
+class ADrawable : public AComponent
 {
 
 public:
-    virtual void Draw() = 0;
+    virtual void Update() override;
 
 };

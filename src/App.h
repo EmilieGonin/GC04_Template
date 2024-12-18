@@ -19,6 +19,7 @@ private:
 	std::shared_ptr<Scene> m_scene;
 	
 	void Init();
+	void InitScene();
 	void RegisterForEvent();
 	void Update();
 	void Draw();
