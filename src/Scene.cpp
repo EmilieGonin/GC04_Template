@@ -48,7 +48,7 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		std::shared_ptr<SpriteRenderer> sprite = gameObject->GetComponent<SpriteRenderer>();
 
-		if(!sprite)
+		if(sprite)
 		{
 			sprite->draw(target, states);
 			continue;
@@ -56,7 +56,7 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 		std::shared_ptr<TextRenderer> text = gameObject->GetComponent<TextRenderer>();
 
-		if(!text)
+		if(text)
 		{
 			text->draw(target, states);
 			continue;

@@ -29,13 +29,13 @@ private:
 
     friend class Singleton<AssetManager>;
 
-    const std::string _resPath = "resources/";
+    const std::string _resPath = "/resources/";
     const std::map<SpriteType, std::string> _spritesPath =
     {
-        { SpriteType::BACKGROUND, "Roboto-Regular.ttf" },
-        { SpriteType::BALL, "sprites/ball.svg" },
-        { SpriteType::BRICK, "sprites/block.svg" },
-        { SpriteType::PADDLE, "sprites/paddle.svg" }
+        { SpriteType::BACKGROUND, "sprites/bg.png" },
+        { SpriteType::BALL, "sprites/ball.png" },
+        { SpriteType::BRICK, "sprites/block.png" },
+        { SpriteType::PADDLE, "sprites/paddle.png" }
     };
 
     sf::Font _font;

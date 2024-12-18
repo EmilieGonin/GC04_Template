@@ -1,11 +1,13 @@
 #pragma once
-
+#include <filesystem>
 #include "AssetManager.h"
 
 
 AssetManager::AssetManager()
 {
-	if (!_font.openFromFile(_resPath + "Roboto-Regular.ttf"))
+    auto currentPath = std::filesystem::current_path().string();
+
+	if (!_font.openFromFile(currentPath + _resPath + "Roboto-Regular.ttf"))
 	{
 		std::cerr << "Can't open font from file." << std::endl;
 	}
@@ -31,10 +33,10 @@ const sf::Texture& AssetManager::GetTexture(SpriteType type)
     {
         return _textures.at(type);
     }
-
+    auto currentPath = std::filesystem::current_path().string();
     // Otherwise, it is loaded from the specified path
     sf::Texture texture;
-    if (!texture.loadFromFile(_resPath + _spritesPath.at(type)))
+    if (!texture.loadFromFile(currentPath + _resPath + _spritesPath.at(type)))
     {
         std::cerr << "Erreur : Impossible de charger le sprite : "
             << _spritesPath.at(type) << std::endl;
