@@ -1,6 +1,6 @@
 #include "..\AComponent.h"
 
-class ATransform : public AComponent 
+class ATransform : public AComponent
 {
 
 public:

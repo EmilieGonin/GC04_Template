@@ -13,7 +13,10 @@ void GameObject::AddComponent(std::shared_ptr<AComponent> component)
 
 void GameObject::RemoveComponent(std::shared_ptr<AComponent> component)
 {
-    m_components.erase(std::remove(m_components.begin(), m_components.end(), component), m_components.end());
+    m_components.erase(std::remove(
+        m_components.begin(), 
+        m_components.end(), 
+        component), m_components.end());
 }
 
 void GameObject::Update()

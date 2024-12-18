@@ -11,3 +11,16 @@ void CircleCollider::Update()
 {
 
 }
+
+bool CircleCollider::CheckCollisionWithCircle(const CircleCollider& other)
+{
+
+	//auto distance = m_radius;
+
+	return false;
+}
+
+bool CircleCollider::CheckCollisionWithRectangle(const RectCollider& other)
+{
+	return false;
+}

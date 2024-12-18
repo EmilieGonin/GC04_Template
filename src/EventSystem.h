@@ -1,4 +1,3 @@
-#pragma once
 #include <optional>
 #include <SFML/Window/Event.hpp>
 #include <functional>

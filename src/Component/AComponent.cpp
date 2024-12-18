@@ -1,5 +1,4 @@
 #pragma once
-
 #include "AComponent.h"
 
 void AComponent::Start()

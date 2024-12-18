@@ -1,3 +1,4 @@
+#pragma once
 #include "AudioManager.h"
 
 AudioManager::AudioManager()

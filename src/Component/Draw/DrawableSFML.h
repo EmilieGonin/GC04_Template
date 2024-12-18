@@ -1,6 +1,7 @@
 #pragma once
-#include "ADrawable.h"
+
 #include <SFML/Graphics.hpp>
+#include "ADrawable.h"
 
 class DrawableSFML : public ADrawable, public sf::Drawable
 {

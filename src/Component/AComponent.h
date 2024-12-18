@@ -1,8 +1,6 @@
 #pragma once
-
-class AComponent 
+class AComponent
 {
-
 public:
 
     virtual ~AComponent() = default;
@@ -12,3 +10,4 @@ public:
 private:
     bool m_isStarted;
 };
+
