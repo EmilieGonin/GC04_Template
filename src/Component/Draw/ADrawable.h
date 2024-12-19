@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../AComponent.h"
 
 class ADrawable : public AComponent

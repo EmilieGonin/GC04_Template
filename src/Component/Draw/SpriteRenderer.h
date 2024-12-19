@@ -1,6 +1,8 @@
 #pragma once
 
 #include "DrawableSFML.h"
+#pragma once
+
 #include <SFML/Graphics/Sprite.hpp>
 
 class SpriteRenderer : public DrawableSFML

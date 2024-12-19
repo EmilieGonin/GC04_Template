@@ -14,9 +14,9 @@ BackgroundBehaviour::BackgroundBehaviour()
 void BackgroundBehaviour::Init(const sf::Vector2f& windowSize)
 {
 	std::shared_ptr<SpriteRenderer> spriteRenderer = m_gameObject->GetComponent<SpriteRenderer>();
+	std::shared_ptr<sf::Texture> backgroundImage = AssetManager::GetInstance().GetTexture(TextureType::BACKGROUND);
 
-	const sf::Texture& backgroundImage = AssetManager::GetInstance().GetTexture(SpriteType::BACKGROUND);
-	spriteRenderer->SetTexture(backgroundImage);
+	spriteRenderer->SetTexture(*backgroundImage);
 
 	//sf::Vector2f origin = sf::Vector2f(0, 0);
 	//spriteRenderer->SetPosition(origin);

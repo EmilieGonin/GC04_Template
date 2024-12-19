@@ -20,7 +20,7 @@ class AssetManager : public Singleton<AssetManager>
 public:
     // Accessors
     const sf::Font GetFont() const { return m_font; }
-    const std::string GetSpritePath(SpriteType type);
+    const std::string GetSpritePath(TextureType type);
     std::shared_ptr<sf::Texture> GetTexture(TextureType type);
 
     void LoadAssets();
@@ -34,17 +34,16 @@ private:
 
     friend class Singleton<AssetManager>;
 
-    std::map<TextureType, std::shared_ptr<sf::Texture>> m_textures;
-
-    const std::string _resPath = "/resources/";
+    const std::string m_resPath = "/resources/";
     const std::string m_mainFont = "Roboto-Regular.ttf";
-    const std::map<SpriteType, std::string> m_texturesPath =
+    const std::map<TextureType, std::string> m_texturesPath =
     {
-        { SpriteType::BACKGROUND, "sprites/bg.png" },
-        { SpriteType::BALL, "sprites/ball.png" },
-        { SpriteType::BRICK, "sprites/block.png" },
-        { SpriteType::PADDLE, "sprites/paddle.png" }
+        { TextureType::BACKGROUND, "sprites/bg.png" },
+        { TextureType::BALL, "sprites/ball.png" },
+        { TextureType::BRICK, "sprites/block.png" },
+        { TextureType::PADDLE, "sprites/paddle.png" }
     };
 
     sf::Font m_font;
+    std::map<TextureType, std::shared_ptr<sf::Texture>> m_textures;
 };
