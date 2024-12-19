@@ -1,8 +1,9 @@
 #include <vector>
 #include <memory>
 #include "Collider/Collider.h"
+#include "../Singleton.h"
 
-class ColliderSystem 
+class ColliderSystem : public Singleton<ColliderSystem>
 {
 
 public:
@@ -11,6 +12,8 @@ public:
 
 private:
     std::vector<std::shared_ptr<Collider>> m_colliders;
+
+    friend class Singleton<ColliderSystem>;
 
 };
 

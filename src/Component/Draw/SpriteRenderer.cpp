@@ -1,6 +1,8 @@
 #pragma once
-#include "SpriteRenderer.h"
 #include <memory>
+#include "SpriteRenderer.h"
+#include "../../GameObject.h"
+#include "../Transform/TransformSFML.h"
 
 
 SpriteRenderer::SpriteRenderer() :
@@ -56,8 +58,10 @@ std::shared_ptr<sf::Sprite> SpriteRenderer::GetSprite()
 
 void SpriteRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    auto transform = m_gameObject->GetComponent<TransformSFML>();
     if (m_sprite) 
     {
+        states.transform.combine(transform->getTransform());
         target.draw(*m_sprite, states);
     }
 }

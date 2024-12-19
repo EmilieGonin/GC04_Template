@@ -2,7 +2,9 @@
 #include <SFML/Window/Event.hpp>
 #include <functional>
 
-class EventSystem
+#include "Singleton.h"
+
+class EventSystem 
 {
 public:
 	EventSystem();

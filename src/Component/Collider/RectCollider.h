@@ -12,6 +12,7 @@ public:
     virtual void Start() override;
 
     sf::FloatRect GetRectBounds() const;
+    void SetRectBounds(sf::FloatRect bounds);
 
 private:
 #ifdef ENABLE_DEBUG_MACRO

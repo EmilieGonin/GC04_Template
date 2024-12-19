@@ -1,6 +1,7 @@
 #include "Collider.h"
 #include "../../GameObject.h"
 #include "../Transform/TransformSFML.h"
+#include "../ColliderSystem.h"
 
 void Collider::ManageCollision(std::shared_ptr<Collider> other)
 {
@@ -13,8 +14,8 @@ void Collider::ManageCollision(std::shared_ptr<Collider> other)
 		if (wasCollidingLastFrame)
 		{
 			if (OnCollisionEnd) OnCollisionEnd(other);
+			m_currentCollisions.erase(it);
 		}
-		m_currentCollisions.erase(it);
 		return;
 	}
 
@@ -32,6 +33,7 @@ void Collider::ManageCollision(std::shared_ptr<Collider> other)
 void Collider::Start()
 {
 	m_transform = m_gameObject->GetComponent<TransformSFML>();
+	ColliderSystem::GetInstance().AddCollider(shared_from_this());
 }
 
 std::shared_ptr<TransformSFML> Collider::GetTransform()

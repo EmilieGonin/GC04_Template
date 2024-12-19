@@ -9,6 +9,9 @@
 #include "./Component/Draw/DrawableSFML.h"
 #include "./Component/Draw/SpriteRenderer.h"
 #include "Component/Collider/CircleCollider.h"
+#include "Component/Collider/RectCollider.h"
+#include "Component/Behaviour/SliderBehaviour.h"
+#include "Component/ColliderSystem.h"
 
 
 Scene::Scene() : 
@@ -25,17 +28,26 @@ void Scene::InstanciateBackground(const sf::Vector2f& windowSize)
 
 
 	backgroundBehaviour->Init(windowSize);
-
-	std::shared_ptr<GameObject> testCollider = std::make_shared<GameObject>();
-	std::shared_ptr<TransformSFML> transform = std::make_shared<TransformSFML>();
-	std::shared_ptr<CircleCollider> collider = std::make_shared<CircleCollider>();
-	collider->m_radius = 50.f;
-
-	testCollider->AddComponent(transform);
-	testCollider->AddComponent(collider);
-
 	_gos.push_back(background);
-	_gos.push_back(testCollider);
+
+
+
+	//std::shared_ptr<GameObject> testCollider = std::make_shared<GameObject>();
+	//std::shared_ptr<TransformSFML> transform = std::make_shared<TransformSFML>();
+	///*std::shared_ptr<RectCollider> collider = std::make_shared<RectCollider>();
+	//collider->SetRectBounds(sf::FloatRect(sf::Vector2f(10.f, 10.f), sf::Vector2f(20.f, 20.f)));*/
+	//std::shared_ptr<CircleCollider> collider = std::make_shared<CircleCollider>();
+	//collider->m_radius = 50.f;
+	//transform->setPosition(sf::Vector2f(10, 10));
+	//testCollider->AddComponent(transform);
+	//testCollider->AddComponent(collider);
+	//_gos.push_back(testCollider);
+
+	std::shared_ptr<GameObject> slider = std::shared_ptr<GameObject>(new GameObject());
+	std::shared_ptr<SliderBehaviour> sliderBehaviour = std::shared_ptr<SliderBehaviour>(new SliderBehaviour());
+	slider->AddComponent(sliderBehaviour);
+	_gos.push_back(slider);
+
 }
 
 void Scene::InstanciateBrick()
@@ -90,6 +102,7 @@ void Scene::InstanciateColonBricks(const int countColon, const int countLine, co
 
 void Scene::Update()
 {
+	ColliderSystem::GetInstance().CheckCollisions();
 	for (auto gameObject : _gos)
 	{
 		gameObject->Update();
@@ -109,11 +122,11 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	for (auto gameObject : _gos)
 	{
 		std::shared_ptr<TransformSFML> transform = gameObject->GetComponent<TransformSFML>();
-		std::shared_ptr<DrawableSFML> drawable = gameObject->GetComponent<DrawableSFML>();
-
-		if(drawable)
+		auto drawables = gameObject->GetAllComponents<DrawableSFML>();
+		for (auto drawable : drawables)
 		{
-			target.draw(*drawable, transform->getTransform());
+			target.draw(*drawable);
+
 		}
 	}
 }

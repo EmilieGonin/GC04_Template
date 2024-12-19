@@ -6,7 +6,7 @@
 
 class TransformSFML;
 
-class Collider : public AComponent
+class Collider : public AComponent, public std::enable_shared_from_this<Collider>
 {
 
 public:

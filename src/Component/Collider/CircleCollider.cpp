@@ -28,8 +28,11 @@ void CircleCollider::Update()
 
 void CircleCollider::Start()
 {
+	Collider::Start();
+
 #ifdef ENABLE_DEBUG_MACRO
 	std::shared_ptr<DebugCollider> debugShape = std::make_shared<DebugCollider>();
+
 	std::shared_ptr<sf::CircleShape> circleShape = std::make_shared<sf::CircleShape>();
 	circleShape->setFillColor(sf::Color::Transparent);
 	circleShape->setOutlineColor(sf::Color::Green);

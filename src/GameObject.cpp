@@ -10,6 +10,10 @@ GameObject::GameObject()
     AddComponent(transform);
 }
 
+GameObject::~GameObject()
+{
+}
+
 void GameObject::AddComponent(std::shared_ptr<AComponent> component)
 {    
     for (auto existingComponent : m_components)

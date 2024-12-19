@@ -28,11 +28,16 @@ bool RectCollider::CheckCollision(std::shared_ptr<Collider> other)
 
 void RectCollider::Update()
 {
+	if (!m_transform)
+	{
+		return;
+	}
 	m_rectBounds.position = m_transform->getPosition();
 }
 
-void RectCollider::Start() {
-
+void RectCollider::Start() 
+{
+	Collider::Start();
 #ifdef ENABLE_DEBUG_MACRO
 	InitDebugComponent();
 #endif // ENABLE_DEBUG_MACRO
@@ -42,6 +47,11 @@ void RectCollider::Start() {
 sf::FloatRect RectCollider::GetRectBounds() const
 {
 	return m_rectBounds;
+}
+
+void RectCollider::SetRectBounds(sf::FloatRect bounds)
+{
+	m_rectBounds = bounds;
 }
 
 
@@ -60,7 +70,14 @@ bool RectCollider::CheckCollisionWithCircle(std::shared_ptr<CircleCollider> othe
 
 bool RectCollider::CheckCollisionWithRectangle(std::shared_ptr<RectCollider> other)
 {
-	auto intersection = other->GetRectBounds().findIntersection(m_rectBounds);
+	
+	auto rectPos = m_transform->getPosition() + m_rectBounds.getCenter();
+	sf::FloatRect rectWorld = sf::FloatRect(rectPos, m_rectBounds.size);
+
+	auto otherRectPos = other->m_transform->getPosition() + other->GetRectBounds().getCenter();
+	sf::FloatRect otherRectWorld = sf::FloatRect(otherRectPos, other->GetRectBounds().size);
+
+	auto intersection = m_rectBounds.findIntersection(other->GetRectBounds());
 	return intersection != std::nullopt;
 }
 
@@ -71,8 +88,10 @@ void RectCollider::InitDebugComponent()
 	std::shared_ptr<DebugCollider> debugShape = std::make_shared<DebugCollider>();
 	std::shared_ptr<sf::RectangleShape> rectangleShape = std::make_shared<sf::RectangleShape>();
 	rectangleShape->setFillColor(sf::Color::Transparent);
-	rectangleShape->setOutlineColor(sf::Color::Green);
+	rectangleShape->setOutlineColor(sf::Color::Red);
 	rectangleShape->setSize(m_rectBounds.size);
+	rectangleShape->setOutlineThickness(2.f);
+
 	debugShape->SetShape(rectangleShape);
 	m_gameObject->AddComponent(debugShape);
 }

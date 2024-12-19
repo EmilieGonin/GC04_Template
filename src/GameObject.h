@@ -10,6 +10,7 @@ class GameObject
 
 public:
     GameObject();
+    ~GameObject();
     void AddComponent(std::shared_ptr<AComponent> component);
     void RemoveComponent(std::shared_ptr<AComponent> component);
     void Update();
@@ -17,6 +18,9 @@ public:
 
     template<typename T>
     std::shared_ptr<T> GetComponent();
+
+    template<typename T>
+    std::vector<std::shared_ptr<T>> GetAllComponents();
 
 private:
     void Start();
@@ -37,4 +41,20 @@ inline std::shared_ptr<T> GameObject::GetComponent()
         }
     }
     return nullptr;
+}
+
+template<typename T>
+inline std::vector<std::shared_ptr<T>> GameObject::GetAllComponents()
+{
+    std::vector<std::shared_ptr<T>> result{};
+
+    for (auto component : m_components)
+    {
+        auto componentCasted = std::dynamic_pointer_cast<T>(component);
+        if (componentCasted)
+        {
+            result.push_back(componentCasted);
+        }
+    }
+    return result;
 }

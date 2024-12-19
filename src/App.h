@@ -13,10 +13,10 @@ public:
 	App();
 	~App();
 	void Run();
+	std::shared_ptr<EventSystem> m_eventSystem;
 
 private:
 	std::unique_ptr<sf::RenderWindow> m_window;
-	std::shared_ptr<EventSystem> m_eventSystem;
 	AssetManager& m_assetManager;
 	std::shared_ptr<Scene> m_scene;
 

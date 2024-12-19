@@ -5,6 +5,5 @@
 
 int main()
 {
-    App app = App();
-    app.Run();
+    App::GetInstance().Run();
 }

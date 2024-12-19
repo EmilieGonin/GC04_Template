@@ -12,5 +12,5 @@ public:
 	void Init();
 
 	virtual void Update() override;
-
+	virtual void Start() override;
 };
