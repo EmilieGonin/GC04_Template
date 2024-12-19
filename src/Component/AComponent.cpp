@@ -9,3 +9,8 @@ void AComponent::Start()
 	}
 	m_isStarted = true;
 }
+
+void AComponent::Init(std::shared_ptr<GameObject> gameObject)
+{
+	m_gameObject = gameObject;
+}

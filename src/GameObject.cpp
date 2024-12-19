@@ -1,9 +1,26 @@
 #pragma once
 
 #include "GameObject.h"
+#include "./Component/Transform/ATransform.h"
+#include "./Component/Transform/TransformSFML.h"
+
+GameObject::GameObject()
+{
+    std::shared_ptr<ATransform> transform = std::shared_ptr<ATransform>(new TransformSFML());
+    AddComponent(transform);
+}
 
 void GameObject::AddComponent(std::shared_ptr<AComponent> component)
-{
+{    
+    for (auto existingComponent : m_components)
+    {
+        if (typeid(*existingComponent) == typeid(*component))
+        {
+            return;
+        }
+    }
+
+    component->Init(std::shared_ptr<GameObject>(this));
 	m_components.push_back(component);
     if (m_isStarted)
     {
@@ -29,6 +46,16 @@ void GameObject::Update()
 	{
 		component->Update();
 	}
+}
+
+void GameObject::SetSize(const sf::Vector2f& ratioWindow)
+{
+    std::shared_ptr<ATransform> transform = GetComponent<ATransform>();
+
+    if (transform) 
+    {
+        transform->SetScale(ratioWindow.x, ratioWindow.y);
+    }
 }
 
 void GameObject::Start()

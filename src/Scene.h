@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <memory>
@@ -9,9 +11,9 @@ class Scene : public sf::Drawable
 
 public:
 	Scene();
-	void Init(std::shared_ptr<sf::RenderWindow> window);
-	void InitBackground();
+	void InitBackground(const sf::Vector2f& windowSize);
 	void Update();
+	void SetSize(const sf::Vector2f& ratioWindow);
 
 private:
 	std::shared_ptr<sf::RenderWindow> m_window;

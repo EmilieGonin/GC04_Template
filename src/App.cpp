@@ -23,6 +23,11 @@ void App::Run()
 	Init();
 	while (m_window->isOpen())
 	{
+		m_window->clear();
+
+		// Resize All gameObject
+		//SetSize();
+
 		while (const std::optional event = m_window->pollEvent())
 		{
 			m_eventSystem->ManageEvent(event);
@@ -30,6 +35,7 @@ void App::Run()
 		Update();
 		Draw();
 	}
+	m_window->close();
 }
 
 void App::Init()
@@ -49,8 +55,15 @@ void App::Init()
 void App::InitScene()
 {
 	m_scene = std::shared_ptr<Scene>(new Scene());
-	m_scene->Init(std::shared_ptr<sf::RenderWindow>(m_window.get(), [](sf::RenderWindow*) {}));
-	m_scene->InitBackground();
+	m_scene->InitBackground(m_window->getView().getSize());
+}
+
+void App::SetSize()
+{
+	float ratioX = (float)m_window->getSize().x / (float)defaultWidth;
+	float ratioY = (float)m_window->getSize().y / (float)defaultHeight;
+
+	m_scene->SetSize(sf::Vector2f(ratioX, ratioY));
 }
 
 void App::RegisterForEvent()

@@ -3,8 +3,10 @@
 #include "Scene.h"
 #include "AssetManager.h"
 #include "GameObject.h"
+#include "./Component/Behaviour/BackgroundBehaviour.h"
+#include "./Component/Transform/TransformSFML.h"
+#include "./Component/Draw/DrawableSFML.h"
 #include "./Component/Draw/SpriteRenderer.h"
-#include "./Component/Draw/TextRenderer.h"
 
 
 Scene::Scene() : 
@@ -13,24 +15,17 @@ Scene::Scene() :
 
 }
 
-void Scene::Init(std::shared_ptr<sf::RenderWindow> window)
-{
-	m_window = window;
-}
-
-void Scene::InitBackground()
+void Scene::InitBackground(const sf::Vector2f& windowSize)
 {
 	std::shared_ptr<GameObject> background = std::shared_ptr<GameObject>(new GameObject());
+
+	std::shared_ptr<BackgroundBehaviour> backgroundBehaviour = std::shared_ptr<BackgroundBehaviour>(new BackgroundBehaviour());
 	std::shared_ptr<SpriteRenderer> spriteRenderer = std::shared_ptr<SpriteRenderer>(new SpriteRenderer());
-
-	const sf::Texture& backgroundImage = AssetManager::GetInstance().GetTexture(SpriteType::BACKGROUND);
-	spriteRenderer->SetTexture(backgroundImage);    
-	spriteRenderer->SetPosition(sf::Vector2f(
-		static_cast<float>(m_window->getSize().x) / 2.0f,
-		static_cast<float>(m_window->getSize().y) / 2.0f
-	));
-
+	
 	background->AddComponent(spriteRenderer);
+	background->AddComponent(backgroundBehaviour);
+
+	backgroundBehaviour->Init(windowSize);
 	_gos.push_back(background);
 }
 
@@ -42,24 +37,24 @@ void Scene::Update()
 	}
 }
 
+void Scene::SetSize(const sf::Vector2f& ratioWindow)
+{
+	for (auto gameObject : _gos)
+	{
+		gameObject->SetSize(ratioWindow);
+	}
+}
+
 void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	for (auto gameObject : _gos)
 	{
-		std::shared_ptr<SpriteRenderer> sprite = gameObject->GetComponent<SpriteRenderer>();
+		std::shared_ptr<TransformSFML> transform = gameObject->GetComponent<TransformSFML>();
+		std::shared_ptr<DrawableSFML> drawable = gameObject->GetComponent<DrawableSFML>();
 
-		if(sprite)
+		if(drawable)
 		{
-			sprite->draw(target, states);
-			continue;
-		}
-
-		std::shared_ptr<TextRenderer> text = gameObject->GetComponent<TextRenderer>();
-
-		if(text)
-		{
-			text->draw(target, states);
-			continue;
+			target.draw(*drawable, transform->getTransform());
 		}
 	}
 }
