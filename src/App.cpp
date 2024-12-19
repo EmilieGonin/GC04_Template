@@ -58,6 +58,8 @@ void App::InitScene()
 	m_scene = std::shared_ptr<Scene>(new Scene());
 	m_scene->InstanciateBackground(m_window->getView().getSize());
 	m_scene->InstanciateColonBricks(5, 10, m_window->getView().getSize().x);
+
+	m_scene->InstanciatePaddle(m_eventSystem, m_window->getView().getSize().x / 2, 9 * (m_window->getView().getSize().y / 10));
 }
 
 void App::SetSize()

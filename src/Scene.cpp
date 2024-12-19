@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "./Component/Behaviour/BackgroundBehaviour.h"
 #include "./Component/Behaviour/BrickBehaviour.h"
+#include "./Component/Behaviour/PaddleBehaviour.h"
 #include "./Component/Transform/TransformSFML.h"
 #include "./Component/Draw/DrawableSFML.h"
 #include "./Component/Draw/SpriteRenderer.h"
@@ -28,23 +29,27 @@ void Scene::InstanciateBackground(const sf::Vector2f& windowSize)
 
 	std::shared_ptr<GameObject> testCollider = std::make_shared<GameObject>();
 	std::shared_ptr<TransformSFML> transform = std::make_shared<TransformSFML>();
-	std::shared_ptr<CircleCollider> collider = std::make_shared<CircleCollider>();
-	collider->m_radius = 50.f;
+	//std::shared_ptr<CircleCollider> collider = std::make_shared<CircleCollider>();
+	//collider->m_radius = 50.f;
 
 	testCollider->AddComponent(transform);
-	testCollider->AddComponent(collider);
+	//testCollider->AddComponent(collider);
 
 	_gos.push_back(background);
 	_gos.push_back(testCollider);
 }
 
-void Scene::InstanciateBrick()
+void Scene::InstanciateBrick(int x, int y)
 {
 	std::shared_ptr<GameObject> background = std::shared_ptr<GameObject>(new GameObject());
+	std::shared_ptr<ATransform> transform = background->GetComponent<ATransform>();
+	transform->SetPosition(x, y);
+
 	std::shared_ptr<BrickBehaviour> brickBehaviour = std::shared_ptr<BrickBehaviour>(new BrickBehaviour());
 	background->AddComponent(brickBehaviour);
 
 	brickBehaviour->Init();
+
 	_gos.push_back(background);
 }
 
@@ -59,11 +64,8 @@ void Scene::InstanciateLineBricks(const int count, const int maxWidth, const int
 
 	for (size_t i = 0; i < count; i++)
 	{
-		InstanciateBrick(); 
-		std::shared_ptr<ATransform> transform = _gos[_gos.size() - 1]->GetComponent<ATransform>();
-		
 		float newX = offset + i * (sizeX + offset);
-		transform->SetPosition(newX, posY);
+		InstanciateBrick(newX, posY);
 	}
 }
 
@@ -86,6 +88,20 @@ void Scene::InstanciateColonBricks(const int countColon, const int countLine, co
 		}
 		//InstanciateLineBricks(countLine, maxWidth, newY);
 	}
+}
+
+void Scene::InstanciatePaddle(std::shared_ptr<EventSystem> eventSystem, int x, int y)
+{
+	std::shared_ptr<GameObject> paddle = std::shared_ptr<GameObject>(new GameObject());
+	std::shared_ptr<ATransform> transform = paddle->GetComponent<ATransform>();
+	transform->SetPosition(x, y);
+
+	std::shared_ptr<PaddleBehaviour> paddleBehaviour = std::shared_ptr<PaddleBehaviour>(new PaddleBehaviour());
+	paddle->AddComponent(paddleBehaviour);
+
+	paddleBehaviour->Init(eventSystem);
+
+	_gos.push_back(paddle);
 }
 
 void Scene::Update()

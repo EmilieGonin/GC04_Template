@@ -5,16 +5,25 @@
 #include <memory>
 
 class GameObject;
+class EventSystem;
 
 class Scene : public sf::Drawable
 {
 
 public:
 	Scene();
+
+	// BACKGROUND
 	void InstanciateBackground(const sf::Vector2f& windowSize);
-	void InstanciateBrick();
+
+	// BRICK
+	void InstanciateBrick(int x, int y);
 	void InstanciateLineBricks(const int count, const int maxWidth, const int posY = 0);
 	void InstanciateColonBricks(const int countColon, const int countLine, const int maxWidth);
+
+	// PADDLE
+	void InstanciatePaddle(std::shared_ptr<EventSystem> eventSystem, int x, int y);
+
 	void Update();
 	void SetSize(const sf::Vector2f& ratioWindow);
 

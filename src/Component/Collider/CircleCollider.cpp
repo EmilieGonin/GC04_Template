@@ -28,6 +28,8 @@ void CircleCollider::Update()
 
 void CircleCollider::Start()
 {
+	Collider::Start();
+
 #ifdef ENABLE_DEBUG_MACRO
 	std::shared_ptr<DebugCollider> debugShape = std::make_shared<DebugCollider>();
 	std::shared_ptr<sf::CircleShape> circleShape = std::make_shared<sf::CircleShape>();
@@ -44,8 +46,8 @@ void CircleCollider::Start()
 
 bool CircleCollider::CheckCollisionWithCircle(std::shared_ptr<CircleCollider> other)
 {
-	sf::Vector2f pos = m_transform->getPosition();
-	sf::Vector2f otherPos = other->m_transform->getPosition();
+	sf::Vector2f pos = sf::Vector2f(m_transform->GetPositionX(), m_transform->GetPositionY());
+	sf::Vector2f otherPos = sf::Vector2f(other->m_transform->GetPositionX(), other->m_transform->GetPositionY());
 	
 	float horizontalDist = (otherPos.x - pos.x) * (otherPos.x - pos.x);
 	float verticalDist = (otherPos.y - pos.y) * (otherPos.y - pos.y);
@@ -58,10 +60,11 @@ bool CircleCollider::CheckCollisionWithCircle(std::shared_ptr<CircleCollider> ot
 
 bool CircleCollider::CheckCollisionWithRectangle(std::shared_ptr<RectCollider> other)
 {
-	sf::Vector2f absCenter = other->GetRectBounds().getCenter() + m_transform->getPosition();
-	sf::Vector2f direction = (absCenter - m_transform->getPosition()).normalized();
+	sf::Vector2f position = sf::Vector2f(m_transform->GetPositionX(), m_transform->GetPositionY());
+	sf::Vector2f absCenter = other->GetRectBounds().getCenter() + position;
+	sf::Vector2f direction = (absCenter - position).normalized();
 
-	sf::Vector2f closestPoint = m_transform->getPosition() + direction * m_radius;
+	sf::Vector2f closestPoint = position + direction * m_radius;
 
 
 	return other->GetRectBounds().contains(closestPoint);

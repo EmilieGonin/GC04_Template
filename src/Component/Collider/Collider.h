@@ -4,7 +4,7 @@
 #include <memory>
 #include "..\AComponent.h"
 
-class TransformSFML;
+class ATransform;
 
 class Collider : public AComponent
 {
@@ -16,7 +16,7 @@ public:
     virtual void Update() = 0;
     virtual void Start() override;
 
-    std::shared_ptr<TransformSFML> GetTransform();
+    std::shared_ptr<ATransform> GetTransform();
 
     std::function<void(std::shared_ptr<Collider>)> OnCollisionStart;
     std::function<void(std::shared_ptr<Collider>)> OnCollisionUpdate;
@@ -25,6 +25,6 @@ private:
     std::vector<std::shared_ptr<Collider>> m_currentCollisions;
     float m_radius;
 protected:
-    std::shared_ptr<TransformSFML> m_transform;
+    std::shared_ptr<ATransform> m_transform;
 
 };

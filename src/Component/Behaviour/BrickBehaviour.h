@@ -2,6 +2,8 @@
 
 #include "../AComponent.h"
 
+class GameObject;
+
 class BrickBehaviour : public AComponent
 {
 

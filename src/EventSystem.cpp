@@ -1,5 +1,3 @@
-#pragma once
-
 #include "EventSystem.h"
 
 EventSystem::EventSystem()
@@ -26,20 +24,26 @@ void EventSystem::ManageEvent(const std::optional<sf::Event> event)
             WindowCloseEvent();
         }
     }
-    if (event->is<sf::Event::KeyPressed>())
-    {
-        auto keypressedEvent = event->getIf<sf::Event::KeyPressed>(); 
-        if (KeyPressedEvent)
-        {
-            KeyPressedEvent(keypressedEvent);
+
+    if (event->is<sf::Event::KeyPressed>()) {
+        auto keyPressedEvent = event->getIf<sf::Event::KeyPressed>();
+        for (auto& callback : KeyPressedCallbacks) {
+            callback(*keyPressedEvent);
         }
     }
-    if (event->is<sf::Event::KeyReleased>())
-    {
+
+    if (event->is<sf::Event::KeyReleased>()) {
         auto keyReleasedEvent = event->getIf<sf::Event::KeyReleased>();
-        if (KeyReleasedEvent)
-        {
-            KeyReleasedEvent(keyReleasedEvent);
+        for (auto& callback : KeyReleasedCallbacks) {
+            callback(*keyReleasedEvent);
         }
     }
+}
+
+void EventSystem::SubscribeToKeyPressed(const std::function<void(const sf::Event::KeyPressed&)>& callback) {
+    KeyPressedCallbacks.push_back(callback);
+}
+
+void EventSystem::SubscribeToKeyReleased(const std::function<void(const sf::Event::KeyReleased&)>& callback) {
+    KeyReleasedCallbacks.push_back(callback);
 }

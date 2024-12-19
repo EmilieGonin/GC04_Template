@@ -1,6 +1,7 @@
 #include "Collider.h"
 #include "../../GameObject.h"
 #include "../Transform/TransformSFML.h"
+#include <memory>
 
 void Collider::ManageCollision(std::shared_ptr<Collider> other)
 {
@@ -31,10 +32,10 @@ void Collider::ManageCollision(std::shared_ptr<Collider> other)
 
 void Collider::Start()
 {
-	m_transform = m_gameObject->GetComponent<TransformSFML>();
+	m_transform = m_gameObject->GetComponent<ATransform>();
 }
 
-std::shared_ptr<TransformSFML> Collider::GetTransform()
+std::shared_ptr<ATransform> Collider::GetTransform()
 {
 	return m_transform;
 }

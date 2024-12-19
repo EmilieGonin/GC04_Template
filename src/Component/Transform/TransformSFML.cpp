@@ -21,3 +21,28 @@ void TransformSFML::SetScale(float x, float y)
 {
 	setScale(sf::Vector2f(x, y));
 }
+
+float TransformSFML::GetPositionX()
+{
+	return getPosition().x;
+}
+
+float TransformSFML::GetPositionY()
+{
+	return getPosition().y;
+}
+
+float TransformSFML::GetRotation()
+{
+	return getRotation().asDegrees();
+}
+
+float TransformSFML::GetScaleX()
+{
+	return getScale().x;
+}
+
+float TransformSFML::GetScaleY()
+{
+	return getScale().y;
+}
