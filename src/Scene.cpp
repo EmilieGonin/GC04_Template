@@ -4,6 +4,7 @@
 #include "AssetManager.h"
 #include "GameObject.h"
 #include "./Component/Behaviour/BackgroundBehaviour.h"
+#include "./Component/Behaviour/BrickBehaviour.h"
 #include "./Component/Transform/TransformSFML.h"
 #include "./Component/Draw/DrawableSFML.h"
 #include "./Component/Draw/SpriteRenderer.h"
@@ -16,14 +17,10 @@ Scene::Scene() :
 
 }
 
-void Scene::InitBackground(const sf::Vector2f& windowSize)
+void Scene::InstanciateBackground(const sf::Vector2f& windowSize)
 {
 	std::shared_ptr<GameObject> background = std::shared_ptr<GameObject>(new GameObject());
-
 	std::shared_ptr<BackgroundBehaviour> backgroundBehaviour = std::shared_ptr<BackgroundBehaviour>(new BackgroundBehaviour());
-	std::shared_ptr<SpriteRenderer> spriteRenderer = std::shared_ptr<SpriteRenderer>(new SpriteRenderer());
-	
-	background->AddComponent(spriteRenderer);
 	background->AddComponent(backgroundBehaviour);
 
 
@@ -39,6 +36,56 @@ void Scene::InitBackground(const sf::Vector2f& windowSize)
 
 	_gos.push_back(background);
 	_gos.push_back(testCollider);
+}
+
+void Scene::InstanciateBrick()
+{
+	std::shared_ptr<GameObject> background = std::shared_ptr<GameObject>(new GameObject());
+	std::shared_ptr<BrickBehaviour> brickBehaviour = std::shared_ptr<BrickBehaviour>(new BrickBehaviour());
+	background->AddComponent(brickBehaviour);
+
+	brickBehaviour->Init();
+	_gos.push_back(background);
+}
+
+void Scene::InstanciateLineBricks(const int count, const int maxWidth, const int posY)
+{
+	std::shared_ptr<sf::Texture> textureRef = AssetManager::GetInstance().GetTexture(TextureType::BRICK);
+
+	int sizeX = textureRef->getSize().x; 
+	int totalBlockWidth = count * sizeX;
+	float remainingSpace = maxWidth - totalBlockWidth;
+	float offset = remainingSpace / (count + 1);
+
+	for (size_t i = 0; i < count; i++)
+	{
+		InstanciateBrick(); 
+		std::shared_ptr<ATransform> transform = _gos[_gos.size() - 1]->GetComponent<ATransform>();
+		
+		float newX = offset + i * (sizeX + offset);
+		transform->SetPosition(newX, posY);
+	}
+}
+
+void Scene::InstanciateColonBricks(const int countColon, const int countLine, const int maxWidth)
+{
+	std::shared_ptr<sf::Texture> textureRef = AssetManager::GetInstance().GetTexture(TextureType::BRICK);
+
+	int sizeY = textureRef->getSize().y;
+
+	for (size_t i = 0; i < countColon; i++)
+	{
+		float newY = (sizeY * (i * 2));
+		if (i % 2 == 0) 
+		{
+			InstanciateLineBricks(countLine + 1, maxWidth, newY);
+		}
+		else 
+		{
+			InstanciateLineBricks(countLine, maxWidth, newY);
+		}
+		//InstanciateLineBricks(countLine, maxWidth, newY);
+	}
 }
 
 void Scene::Update()

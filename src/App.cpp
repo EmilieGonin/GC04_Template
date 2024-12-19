@@ -27,7 +27,7 @@ void App::Run()
 		m_window->clear();
 
 		// Resize All gameObject
-		//SetSize();
+		SetSize();
 
 		while (const std::optional event = m_window->pollEvent())
 		{
@@ -56,13 +56,14 @@ void App::Init()
 void App::InitScene()
 {
 	m_scene = std::shared_ptr<Scene>(new Scene());
-	m_scene->InitBackground(m_window->getView().getSize());
+	m_scene->InstanciateBackground(m_window->getView().getSize());
+	m_scene->InstanciateColonBricks(5, 10, m_window->getView().getSize().x);
 }
 
 void App::SetSize()
 {
-	float ratioX = (float)m_window->getSize().x / (float)defaultWidth;
-	float ratioY = (float)m_window->getSize().y / (float)defaultHeight;
+	float ratioX = (float)m_window->getView().getSize().x / (float)defaultWidth;
+	float ratioY = (float)m_window->getView().getSize().y / (float)defaultHeight;
 
 	m_scene->SetSize(sf::Vector2f(ratioX, ratioY));
 }

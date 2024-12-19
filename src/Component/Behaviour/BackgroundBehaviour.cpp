@@ -13,15 +13,19 @@ BackgroundBehaviour::BackgroundBehaviour()
 
 void BackgroundBehaviour::Init(const sf::Vector2f& windowSize)
 {
-	std::shared_ptr<SpriteRenderer> spriteRenderer = m_gameObject->GetComponent<SpriteRenderer>();
-	std::shared_ptr<sf::Texture> backgroundImage = AssetManager::GetInstance().GetTexture(TextureType::BACKGROUND);
+	std::shared_ptr<SpriteRenderer> spriteRenderer = std::shared_ptr<SpriteRenderer>(new SpriteRenderer());
+	m_gameObject->AddComponent(spriteRenderer);
 
+	std::shared_ptr<sf::Texture> backgroundImage = AssetManager::GetInstance().GetTexture(TextureType::BACKGROUND);
 	spriteRenderer->SetTexture(*backgroundImage);
 
-	//sf::Vector2f origin = sf::Vector2f(0, 0);
-	//spriteRenderer->SetPosition(origin);
+	std::shared_ptr<sf::Sprite> sprite = spriteRenderer->GetSprite();
 
-	spriteRenderer->SetScale(windowSize);
+	sf::IntRect rectDefault = sprite->getTextureRect();
+	float ratioX = windowSize.x / (float)rectDefault.size.x;
+	float ratioY = windowSize.y / (float)rectDefault.size.y;
+
+	sprite->setScale(sf::Vector2f(ratioX, ratioY));
 }
 
 void BackgroundBehaviour::Update()

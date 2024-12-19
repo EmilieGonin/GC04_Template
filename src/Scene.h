@@ -11,7 +11,10 @@ class Scene : public sf::Drawable
 
 public:
 	Scene();
-	void InitBackground(const sf::Vector2f& windowSize);
+	void InstanciateBackground(const sf::Vector2f& windowSize);
+	void InstanciateBrick();
+	void InstanciateLineBricks(const int count, const int maxWidth, const int posY = 0);
+	void InstanciateColonBricks(const int countColon, const int countLine, const int maxWidth);
 	void Update();
 	void SetSize(const sf::Vector2f& ratioWindow);
 

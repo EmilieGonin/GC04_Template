@@ -17,6 +17,8 @@ public:
     void SetOrigin(const sf::Vector2f& origin);
     void SetScale(const sf::Vector2f& windowSize);
 
+    std::shared_ptr<sf::Sprite> GetSprite();
+
     // Hérité via Drawable
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 

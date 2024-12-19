@@ -19,5 +19,5 @@ void TransformSFML::SetRotation(float angle)
 
 void TransformSFML::SetScale(float x, float y)
 {
-	setPosition(sf::Vector2f(x, y));
+	setScale(sf::Vector2f(x, y));
 }

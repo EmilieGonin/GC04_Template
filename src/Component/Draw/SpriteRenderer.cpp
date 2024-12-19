@@ -46,13 +46,12 @@ void SpriteRenderer::SetOrigin(const sf::Vector2f& origin)
 
 void SpriteRenderer::SetScale(const sf::Vector2f& windowSize)
 {
-    sf::IntRect rectDefault = m_sprite->getTextureRect();
-    float ratioX = windowSize.x / (float)rectDefault.size.x;
-    float ratioY = windowSize.y / (float)rectDefault.size.y;
+    m_sprite->setScale(windowSize);
+}
 
-    // Utiliser le plus petit rapport pour garder l'aspect
-    float scaleFactor = std::min(ratioX, ratioY);
-    m_sprite->setScale(sf::Vector2f(scaleFactor, scaleFactor));
+std::shared_ptr<sf::Sprite> SpriteRenderer::GetSprite()
+{
+    return m_sprite;
 }
 
 void SpriteRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
