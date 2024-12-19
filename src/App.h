@@ -29,4 +29,6 @@ private:
 	void Draw();
 
 	void WindowCloseEventCallback();
+
+	friend class Singleton<App>;
 };
