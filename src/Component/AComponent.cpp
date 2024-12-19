@@ -14,3 +14,8 @@ void AComponent::Init(std::shared_ptr<GameObject> gameObject)
 {
 	m_gameObject = gameObject;
 }
+
+std::shared_ptr<GameObject> AComponent::GetGameObject()
+{
+	return m_gameObject;
+}

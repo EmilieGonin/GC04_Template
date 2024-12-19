@@ -5,13 +5,15 @@ class CircleCollider : public Collider
 {
 
 public:
-     bool CheckCollision(const Collider& other) override;
+     bool CheckCollision(std::shared_ptr<Collider> other) override;
      virtual void Update() override;
-
+     virtual void Start() override;
      float m_radius;
 private:
+#ifdef ENABLE_DEBUG_MACRO
+    void InitDebugComponent();
+#endif
 
-
-    bool CheckCollisionWithCircle(const CircleCollider& other);
-    bool CheckCollisionWithRectangle(const RectCollider& other);
+    bool CheckCollisionWithCircle(std::shared_ptr<CircleCollider> other);
+    bool CheckCollisionWithRectangle(std::shared_ptr<RectCollider> other);
 };

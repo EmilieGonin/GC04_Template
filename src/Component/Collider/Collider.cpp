@@ -1,4 +1,6 @@
 #include "Collider.h"
+#include "../../GameObject.h"
+#include "../Transform/TransformSFML.h"
 
 void Collider::ManageCollision(std::shared_ptr<Collider> other)
 {
@@ -6,7 +8,7 @@ void Collider::ManageCollision(std::shared_ptr<Collider> other)
 		m_currentCollisions.end(), other);
 	bool wasCollidingLastFrame = it != m_currentCollisions.end();
 
-	if (!CheckCollision(*other))
+	if (!CheckCollision(other))
 	{
 		if (wasCollidingLastFrame)
 		{
@@ -25,4 +27,14 @@ void Collider::ManageCollision(std::shared_ptr<Collider> other)
 	m_currentCollisions.push_back(other);
 	if (OnCollisionStart) OnCollisionStart(other);
 
+}
+
+void Collider::Start()
+{
+	m_transform = m_gameObject->GetComponent<TransformSFML>();
+}
+
+std::shared_ptr<TransformSFML> Collider::GetTransform()
+{
+	return m_transform;
 }

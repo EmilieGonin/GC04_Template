@@ -7,14 +7,19 @@ class RectCollider : public Collider
 {
 
 public:
-    bool CheckCollision(const Collider& other) override;
+    bool CheckCollision(std::shared_ptr<Collider> other) override;
     virtual void Update() override;
+    virtual void Start() override;
 
     sf::FloatRect GetRectBounds() const;
 
 private:
-    bool CheckCollisionWithCircle(const CircleCollider& other);
-    bool CheckCollisionWithRectangle(const RectCollider& other);
+#ifdef ENABLE_DEBUG_MACRO
+    void InitDebugComponent();
+#endif
+    bool CheckCollisionWithCircle(std::shared_ptr<CircleCollider> other);
+    bool CheckCollisionWithRectangle(std::shared_ptr<RectCollider> other);
     float m_width, m_height;
     sf::FloatRect m_rectBounds;
+
 };

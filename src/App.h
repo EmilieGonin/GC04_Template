@@ -1,12 +1,13 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
+#include "Singleton.h"
 
 class Window;
 class EventSystem;
 class AssetManager;
 class Scene;
 
-class App
+class App : public Singleton<App>
 {
 public:
 	App();
@@ -30,4 +31,6 @@ private:
 	void Draw();
 
 	void WindowCloseEventCallback();
+
+	friend class Singleton<App>;
 };

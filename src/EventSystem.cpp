@@ -26,6 +26,20 @@ void EventSystem::ManageEvent(const std::optional<sf::Event> event)
             WindowCloseEvent();
         }
     }
-
-
+    if (event->is<sf::Event::KeyPressed>())
+    {
+        auto keypressedEvent = event->getIf<sf::Event::KeyPressed>(); 
+        if (KeyPressedEvent)
+        {
+            KeyPressedEvent(keypressedEvent);
+        }
+    }
+    if (event->is<sf::Event::KeyReleased>())
+    {
+        auto keyReleasedEvent = event->getIf<sf::Event::KeyReleased>();
+        if (KeyReleasedEvent)
+        {
+            KeyReleasedEvent(keyReleasedEvent);
+        }
+    }
 }
