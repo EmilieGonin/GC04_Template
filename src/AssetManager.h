@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include <windows.h>
 #include <iostream>
@@ -7,6 +9,7 @@
 
 enum class TextureType
 {
+    BACKGROUND,
     BALL,
     BRICK,
     PADDLE
@@ -15,8 +18,12 @@ enum class TextureType
 class AssetManager : public Singleton<AssetManager>
 {
 public:
-    sf::Font GetFont() const { return m_font; }
+    // Accessors
+    const sf::Font GetFont() const { return m_font; }
+    const std::string GetSpritePath(SpriteType type);
     std::shared_ptr<sf::Texture> GetTexture(TextureType type);
+
+    void LoadAssets();
 
 private:
     AssetManager();
@@ -27,16 +34,17 @@ private:
 
     friend class Singleton<AssetManager>;
 
-    const std::string m_resPath = "resources/";
-    const std::string m_mainFont = "Roboto-Regular.ttf";
-    const std::map<TextureType, std::string> m_texturesPath =
-    {
-        { TextureType::BALL, "sprites/ball.png" },
-        { TextureType::BRICK, "sprites/block.png" },
-        { TextureType::PADDLE, "sprites/paddle.png" }
-    };
-
     std::map<TextureType, std::shared_ptr<sf::Texture>> m_textures;
+
+    const std::string _resPath = "/resources/";
+    const std::string m_mainFont = "Roboto-Regular.ttf";
+    const std::map<SpriteType, std::string> m_texturesPath =
+    {
+        { SpriteType::BACKGROUND, "sprites/bg.png" },
+        { SpriteType::BALL, "sprites/ball.png" },
+        { SpriteType::BRICK, "sprites/block.png" },
+        { SpriteType::PADDLE, "sprites/paddle.png" }
+    };
 
     sf::Font m_font;
 };

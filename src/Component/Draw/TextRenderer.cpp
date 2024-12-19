@@ -1,9 +1,6 @@
-#include "TextRenderer.h"
+#pragma once
 
-void TextRenderer::Draw()
-{
-	//App::GetInstance()->m_window->display(text);
-}
+#include "TextRenderer.h"
 
 /// <summary>
 /// Set Text in TextRenderer Component
@@ -16,4 +13,15 @@ void TextRenderer::SetText(const std::string& text, const sf::Font& font, unsign
     m_text.setFont(font);
     m_text.setString(text);
     m_text.setCharacterSize(size);
+}
+
+void TextRenderer::SetPosition(const sf::Vector2f& postion)
+{
+    m_position = postion;
+    m_text.setPosition(postion);
+}
+
+void TextRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    target.draw(m_text, states);
 }

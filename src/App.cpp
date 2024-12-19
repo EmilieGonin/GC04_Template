@@ -1,9 +1,13 @@
+#pragma once
+
 #include <iostream>
 
 #include "App.h"
+#include "AssetManager.h"
 #include "Window.h"
 #include "EventSystem.h"
 #include "AssetManager.h"
+#include "Scene.h"
 
 using namespace std::placeholders;
 
@@ -20,6 +24,11 @@ void App::Run()
 	Init();
 	while (m_window->isOpen())
 	{
+		m_window->clear();
+
+		// Resize All gameObject
+		//SetSize();
+
 		while (const std::optional event = m_window->pollEvent())
 		{
 			m_eventSystem->ManageEvent(event);
@@ -27,18 +36,35 @@ void App::Run()
 		Update();
 		Draw();
 	}
+	m_window->close();
 }
 
 void App::Init()
 {
-	m_window = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow());
+	AssetManager::GetInstance().LoadAssets();
+
+	m_window = std::make_unique<sf::RenderWindow>(sf::VideoMode({ 1600u, 900u }), "GC04_Template");
 	m_eventSystem = std::shared_ptr<EventSystem>(new EventSystem());
 
-	m_window->create(sf::VideoMode({ 1600u, 900u }), "GC04_Template");
-	std::cout << "App created" << std::endl;
 	m_window->setFramerateLimit(144u);
 
+	InitScene();
+
 	RegisterForEvent();
+}
+
+void App::InitScene()
+{
+	m_scene = std::shared_ptr<Scene>(new Scene());
+	m_scene->InitBackground(m_window->getView().getSize());
+}
+
+void App::SetSize()
+{
+	float ratioX = (float)m_window->getSize().x / (float)defaultWidth;
+	float ratioY = (float)m_window->getSize().y / (float)defaultHeight;
+
+	m_scene->SetSize(sf::Vector2f(ratioX, ratioY));
 }
 
 void App::RegisterForEvent()
@@ -51,11 +77,13 @@ void App::RegisterForEvent()
 
 void App::Update()
 {
+	m_scene->Update();
 }
 
 void App::Draw()
 {
 	m_window->clear();
+	m_window->draw(*m_scene);
 	m_window->display();
 }
 

@@ -1,11 +1,23 @@
+#pragma once
+
 #include "TransformSFML.h"
+
+void TransformSFML::Update()
+{
+
+}
 
 void TransformSFML::SetPosition(float x, float y)
 {
-	m_position = sf::Vector2f(x, y);
+	setPosition(sf::Vector2f(x, y));
 }
 
-//const sf::Vector2f& TransformSFML::getPosition()
-//{
-//	// TODO: insérer une instruction return ici
-//}
+void TransformSFML::SetRotation(float angle)
+{
+	//TODO
+}
+
+void TransformSFML::SetScale(float x, float y)
+{
+	setPosition(sf::Vector2f(x, y));
+}
