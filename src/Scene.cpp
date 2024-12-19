@@ -7,6 +7,7 @@
 #include "./Component/Transform/TransformSFML.h"
 #include "./Component/Draw/DrawableSFML.h"
 #include "./Component/Draw/SpriteRenderer.h"
+#include "Component/Collider/CircleCollider.h"
 
 
 Scene::Scene() : 
@@ -25,8 +26,19 @@ void Scene::InitBackground(const sf::Vector2f& windowSize)
 	background->AddComponent(spriteRenderer);
 	background->AddComponent(backgroundBehaviour);
 
+
 	backgroundBehaviour->Init(windowSize);
+
+	std::shared_ptr<GameObject> testCollider = std::make_shared<GameObject>();
+	std::shared_ptr<TransformSFML> transform = std::make_shared<TransformSFML>();
+	std::shared_ptr<CircleCollider> collider = std::make_shared<CircleCollider>();
+	collider->m_radius = 50.f;
+
+	testCollider->AddComponent(transform);
+	testCollider->AddComponent(collider);
+
 	_gos.push_back(background);
+	_gos.push_back(testCollider);
 }
 
 void Scene::Update()

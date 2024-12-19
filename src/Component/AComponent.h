@@ -13,6 +13,7 @@ public:
     virtual void Update() = 0;
     virtual void Start();
     virtual void Init(std::shared_ptr<GameObject> gameObject);
+    std::shared_ptr<GameObject> GetGameObject();
 
 private:
     bool m_isStarted;
