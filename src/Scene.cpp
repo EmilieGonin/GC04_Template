@@ -32,18 +32,6 @@ void Scene::InstanciateBackground(const sf::Vector2f& windowSize)
 	_gos.push_back(background);
 
 
-
-	//std::shared_ptr<GameObject> testCollider = std::make_shared<GameObject>();
-	//std::shared_ptr<TransformSFML> transform = std::make_shared<TransformSFML>();
-	///*std::shared_ptr<RectCollider> collider = std::make_shared<RectCollider>();
-	//collider->SetRectBounds(sf::FloatRect(sf::Vector2f(10.f, 10.f), sf::Vector2f(20.f, 20.f)));*/
-	//std::shared_ptr<CircleCollider> collider = std::make_shared<CircleCollider>();
-	//collider->m_radius = 50.f;
-	//transform->setPosition(sf::Vector2f(10, 10));
-	//testCollider->AddComponent(transform);
-	//testCollider->AddComponent(collider);
-	//_gos.push_back(testCollider);
-
 	std::shared_ptr<GameObject> slider = std::shared_ptr<GameObject>(new GameObject());
 	std::shared_ptr<SliderBehaviour> sliderBehaviour = std::shared_ptr<SliderBehaviour>(new SliderBehaviour());
 	slider->AddComponent(sliderBehaviour);

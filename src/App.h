@@ -18,7 +18,7 @@ public:
 private:
 	std::unique_ptr<sf::RenderWindow> m_window;
 	AssetManager& m_assetManager;
-	std::shared_ptr<Scene> m_scene;
+	std::unique_ptr<Scene> m_scene;
 
 	unsigned int defaultWidth = 1600u;
 	unsigned int defaultHeight = 900u;

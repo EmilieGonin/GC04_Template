@@ -23,6 +23,22 @@ BallBehaviour::~BallBehaviour()
 
 void BallBehaviour::Update()
 {
+	if (m_transform->getPosition().x  < 0 && m_direction.x < 0)
+	{
+		m_direction.x = -m_direction.x;
+	}
+	if (m_transform->getPosition().x > 1600 && m_direction.x > 0)
+	{
+		m_direction.x = -m_direction.x;
+	}
+	if (m_transform->getPosition().y < 0 && m_direction.y < 0)
+	{
+		m_direction.y = -m_direction.y;
+	}
+	if (m_transform->getPosition().y > 900 && m_direction.y  > 0)
+	{
+		m_direction.y = -m_direction.y;
+	}
 	m_transform->move(m_direction * 2.f);
 }
 
@@ -39,7 +55,7 @@ void BallBehaviour::Start()
 
 	m_collider = std::make_shared<CircleCollider>();
 	m_collider->m_radius = spriteRenderer->GetSprite()->getGlobalBounds().size.x/2;
-	spriteRenderer->GetSprite()->setOrigin(sf::Vector2f(m_collider->m_radius, m_collider->m_radius));
+	spriteRenderer->GetSprite()->setOrigin(sf::Vector2f(1, 1).normalized() * m_collider->m_radius);
 	m_gameObject->AddComponent(m_collider);
 
 	SetDirection(sf::Vector2f(1, -1));

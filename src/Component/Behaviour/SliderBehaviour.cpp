@@ -77,12 +77,6 @@ void SliderBehaviour::InitComponents()
 	auto releaseBind = std::bind(&SliderBehaviour::InputKeyReleasedCallBack, this, _1);
 	App::GetInstance().m_eventSystem->KeyReleasedEvent = releaseBind;
 
-	auto startCollideBind = std::bind(&SliderBehaviour::StartCollideCallBack, this, _1);
-	m_collider->OnCollisionStart = startCollideBind;
-
-	auto endCollideBind = std::bind(&SliderBehaviour::EndCollideCallBack, this, _1);
-	m_collider->OnCollisionEnd = endCollideBind;
-
 }
 
 void SliderBehaviour::InputKeyPressedCallBack(const sf::Event::KeyPressed* input)
@@ -123,15 +117,4 @@ void SliderBehaviour::InputKeyReleasedCallBack(const sf::Event::KeyReleased* inp
 	{
 		m_movingBot = false;
 	}
-}
-
-void SliderBehaviour::StartCollideCallBack(std::shared_ptr<Collider> other)
-{
-	m_gameObject->GetComponent<SpriteRenderer>()->GetSprite()->setColor(sf::Color::Blue);
-}
-
-void SliderBehaviour::EndCollideCallBack(std::shared_ptr<Collider> other)
-{
-	m_gameObject->GetComponent<SpriteRenderer>()->GetSprite()->setColor(sf::Color::White);
-
 }
