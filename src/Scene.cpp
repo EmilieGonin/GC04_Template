@@ -52,10 +52,11 @@ void Scene::InstanciateBackground(const sf::Vector2f& windowSize)
 	std::shared_ptr<RectCollider> rectColliderTop = std::shared_ptr<RectCollider>(new RectCollider());
 	std::shared_ptr<RectCollider> rectColliderBot = std::shared_ptr<RectCollider>(new RectCollider());
 
-	rectColliderLeft->SetRectBounds(sf::FloatRect(sf::Vector2f(0.f,0.f),sf::Vector2f(5.f, 900.f )));
-	rectColliderRight->SetRectBounds(sf::FloatRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(-5.f, 900.f)));
-	rectColliderTop->SetRectBounds(sf::FloatRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(1600.f, 5.f)));
-	rectColliderBot->SetRectBounds(sf::FloatRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(1600.f, -5.f)));
+	sf::Vector2f defaultVector2 = sf::Vector2f(0.f, 0.f);
+	rectColliderLeft->SetRectBounds(sf::FloatRect(defaultVector2,sf::Vector2f(5.f, windowSize.y)));
+	rectColliderRight->SetRectBounds(sf::FloatRect(defaultVector2, sf::Vector2f(-5.f, windowSize.y)));
+	rectColliderTop->SetRectBounds(sf::FloatRect(defaultVector2, sf::Vector2f(windowSize.x, 5.f)));
+	rectColliderBot->SetRectBounds(sf::FloatRect(defaultVector2, sf::Vector2f(windowSize.x, -5.f)));
 
 	colliderLeft->AddComponent(rectColliderLeft);
 	colliderRight->AddComponent(rectColliderRight);
@@ -63,17 +64,14 @@ void Scene::InstanciateBackground(const sf::Vector2f& windowSize)
 	colliderBot->AddComponent(rectColliderBot);
 
 	colliderLeft->GetComponent<TransformSFML>()->setPosition(sf::Vector2f(-2.f, 0.f));
-	colliderRight->GetComponent<TransformSFML>()->setPosition(sf::Vector2f(1602.f, 0.f));
+	colliderRight->GetComponent<TransformSFML>()->setPosition(sf::Vector2f(windowSize.x + 2.f, 0.f));
 	colliderTop->GetComponent<TransformSFML>()->setPosition(sf::Vector2f(0.f, -2.f));
-	colliderBot->GetComponent<TransformSFML>()->setPosition(sf::Vector2f(0.f, 902.f));
+	colliderBot->GetComponent<TransformSFML>()->setPosition(sf::Vector2f(0.f, windowSize.y + 2.f));
 
 	_gos.push_back(colliderLeft);
 	_gos.push_back(colliderRight);
 	_gos.push_back(colliderTop);
 	_gos.push_back(colliderBot);
-
-	
-
 }
 
 void Scene::InstanciateBrick()

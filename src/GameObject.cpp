@@ -12,6 +12,7 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
+    
 }
 
 void GameObject::AddComponent(std::shared_ptr<AComponent> component)

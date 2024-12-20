@@ -8,3 +8,8 @@ AudioManager::AudioManager()
 	//	//
 	//}
 }
+
+void AudioManager::SetAudio(bool value)
+{
+
+}

@@ -14,9 +14,11 @@ public:
 
 	virtual void Start() override;
 	void SetShape(std::shared_ptr<sf::Shape> shape);
+	void EnabledDebugCollider(bool enabled);
 	std::shared_ptr<sf::Shape> GetShape();
 
 private:
+	bool m_enabled;
 	std::shared_ptr<TransformSFML> m_transform;
 	std::shared_ptr<sf::Shape> m_shape;
 	// Hérité via DrawableSFML

@@ -17,11 +17,17 @@ DebugCollider::~DebugCollider()
 void DebugCollider::Start()
 {
 	m_transform = m_gameObject->GetComponent<TransformSFML>();
+	m_enabled = true;
 }
 
 void DebugCollider::SetShape(std::shared_ptr<sf::Shape> shape)
 {
 	m_shape = shape;
+}
+
+void DebugCollider::EnabledDebugCollider(bool enabled)
+{
+	m_enabled = enabled;
 }
 
 std::shared_ptr<sf::Shape> DebugCollider::GetShape()
@@ -33,7 +39,7 @@ std::shared_ptr<sf::Shape> DebugCollider::GetShape()
 
 void DebugCollider::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	if (m_shape == nullptr)
+	if (m_shape == nullptr || !m_enabled)
 	{
 		return;
 	}

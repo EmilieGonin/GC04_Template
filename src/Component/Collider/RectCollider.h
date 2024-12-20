@@ -16,8 +16,12 @@ public:
 
 private:
 #ifdef ENABLE_DEBUG_MACRO
-    void InitDebugComponent();
+    virtual void InitDebugComponent() override;
+public:
+    virtual void EnabledDebugComponent(bool active) override;
 #endif
+
+private:
     bool CheckCollisionWithCircle(std::shared_ptr<CircleCollider> other);
     bool CheckCollisionWithRectangle(std::shared_ptr<RectCollider> other);
     float m_width, m_height;

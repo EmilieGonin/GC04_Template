@@ -95,4 +95,8 @@ void RectCollider::InitDebugComponent()
 	debugShape->SetShape(rectangleShape);
 	m_gameObject->AddComponent(debugShape);
 }
+void RectCollider::EnabledDebugComponent(bool active)
+{
+	m_gameObject->GetComponent<DebugCollider>()->EnabledDebugCollider(active);
+}
 #endif // ENABLE_DEBUG_MACRO

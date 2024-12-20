@@ -31,16 +31,7 @@ void CircleCollider::Start()
 	Collider::Start();
 
 #ifdef ENABLE_DEBUG_MACRO
-	std::shared_ptr<DebugCollider> debugShape = std::make_shared<DebugCollider>();
-
-	std::shared_ptr<sf::CircleShape> circleShape = std::make_shared<sf::CircleShape>();
-	circleShape->setFillColor(sf::Color::Transparent);
-	circleShape->setOutlineColor(sf::Color::Green);
-	circleShape->setOutlineThickness(1.f);
-	circleShape->setRadius(m_radius);
-	circleShape->setPosition(sf::Vector2f(-1,-1).normalized() * m_radius);
-	debugShape->SetShape(circleShape);
-	m_gameObject->AddComponent(debugShape);
+	InitDebugComponent();
 #endif
 
 }
@@ -73,5 +64,20 @@ bool CircleCollider::CheckCollisionWithRectangle(std::shared_ptr<RectCollider> o
 #ifdef ENABLE_DEBUG_MACRO
 void CircleCollider::InitDebugComponent()
 {
+	std::shared_ptr<DebugCollider> debugShape = std::make_shared<DebugCollider>();
+
+	std::shared_ptr<sf::CircleShape> circleShape = std::make_shared<sf::CircleShape>();
+	circleShape->setFillColor(sf::Color::Transparent);
+	circleShape->setOutlineColor(sf::Color::Green);
+	circleShape->setOutlineThickness(1.f);
+	circleShape->setRadius(m_radius);
+	circleShape->setPosition(sf::Vector2f(-1, -1).normalized() * m_radius);
+	debugShape->SetShape(circleShape);
+	m_gameObject->AddComponent(debugShape);
+}
+
+void CircleCollider::EnabledDebugComponent(bool active)
+{
+	m_gameObject->GetComponent<DebugCollider>()->EnabledDebugCollider(active);
 }
 #endif

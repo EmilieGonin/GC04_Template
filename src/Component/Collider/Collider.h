@@ -27,6 +27,14 @@ private:
     float m_radius;
 
 protected:
+
+#ifdef ENABLE_DEBUG_MACRO
+    virtual void InitDebugComponent() = 0;
+public:
+    virtual void EnabledDebugComponent(bool active) = 0;
+#endif
+protected:
+
     std::shared_ptr<TransformSFML> m_transform;
 
 };

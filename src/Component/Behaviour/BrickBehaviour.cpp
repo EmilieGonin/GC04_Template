@@ -53,6 +53,9 @@ void BrickBehaviour::CollisionStarCallback(std::shared_ptr<Collider> other)
 		return;
 	}
 	m_gameObject->GetComponent<Collider>()->m_isActive = false;
+#ifdef ENABLE_DEBUG_MACRO
+	m_gameObject->GetComponent<Collider>()->EnabledDebugComponent(false);
+#endif
 	m_gameObject->GetComponent<SpriteRenderer>()->GetSprite()->setColor(sf::Color::Transparent);
 
 }
