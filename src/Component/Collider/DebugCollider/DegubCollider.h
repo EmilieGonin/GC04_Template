@@ -1,3 +1,5 @@
+#ifdef ENABLE_DEBUG_MACRO
+
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "../../Draw/DrawableSFML.h"
@@ -21,3 +23,4 @@ private:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 };
+#endif

@@ -59,7 +59,7 @@ bool RectCollider::CheckCollisionWithCircle(std::shared_ptr<CircleCollider> othe
 {
 	std::shared_ptr<TransformSFML> transformOther = other->GetTransform();
 
-	sf::Vector2f absCenter = m_rectBounds.getCenter() + transformOther->getPosition();
+	sf::Vector2f absCenter = m_rectBounds.getCenter();
 	sf::Vector2f direction = (absCenter - transformOther->getPosition()).normalized();
 
 	sf::Vector2f closestPoint = transformOther->getPosition() + direction * other->m_radius;

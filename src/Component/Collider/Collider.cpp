@@ -34,6 +34,7 @@ void Collider::Start()
 {
 	m_transform = m_gameObject->GetComponent<TransformSFML>();
 	ColliderSystem::GetInstance().AddCollider(shared_from_this());
+	m_isActive = true;
 }
 
 std::shared_ptr<TransformSFML> Collider::GetTransform()

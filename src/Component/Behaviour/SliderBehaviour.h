@@ -3,6 +3,7 @@
 
 class TransformSFML;
 class RectCollider;
+class CircleCollider;
 class Collider;
 
 class SliderBehaviour : public AComponent

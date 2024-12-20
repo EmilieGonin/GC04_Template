@@ -1,3 +1,5 @@
+#ifdef ENABLE_DEBUG_MACRO
+
 #pragma once
 
 #include "DegubCollider.h"
@@ -41,3 +43,4 @@ void DebugCollider::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 	auto test = m_transform->getPosition();
 	target.draw(*m_shape, states);
 }
+#endif

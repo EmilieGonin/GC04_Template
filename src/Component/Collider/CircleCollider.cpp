@@ -38,6 +38,7 @@ void CircleCollider::Start()
 	circleShape->setOutlineColor(sf::Color::Green);
 	circleShape->setOutlineThickness(1.f);
 	circleShape->setRadius(m_radius);
+	circleShape->setPosition(sf::Vector2f(-1,-1).normalized() * m_radius);
 	debugShape->SetShape(circleShape);
 	m_gameObject->AddComponent(debugShape);
 #endif
@@ -61,7 +62,7 @@ bool CircleCollider::CheckCollisionWithCircle(std::shared_ptr<CircleCollider> ot
 
 bool CircleCollider::CheckCollisionWithRectangle(std::shared_ptr<RectCollider> other)
 {
-	sf::Vector2f absCenter = other->GetRectBounds().getCenter() + m_transform->getPosition();
+	sf::Vector2f absCenter = other->GetRectBounds().getCenter() ;
 	sf::Vector2f direction = (absCenter - m_transform->getPosition()).normalized();
 
 	sf::Vector2f closestPoint = m_transform->getPosition() + direction * m_radius;

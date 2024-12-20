@@ -1,5 +1,3 @@
-#include "SliderBehaviour.h"
-#include "SliderBehaviour.h"
 #pragma once
 
 #include "SliderBehaviour.h"
@@ -7,9 +5,11 @@
 #include "../../GameObject.h"
 #include "../Draw/SpriteRenderer.h"
 #include "../Collider/RectCollider.h"
+#include "../Collider/CircleCollider.h"
 #include "../Transform/TransformSFML.h"
 #include "../../App.h"
 #include "../../EventSystem.h"
+ 
 
 using namespace std::placeholders;
 

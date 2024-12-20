@@ -6,6 +6,9 @@
 #include "../../GameObject.h"
 #include "../Draw/SpriteRenderer.h"
 #include "../Collider/RectCollider.h"
+#include "../Behaviour/BallBehaviour.h"
+
+using namespace std::placeholders;
 
 BrickBehaviour::BrickBehaviour()
 {
@@ -37,4 +40,19 @@ void BrickBehaviour::Start()
 	auto collider = std::make_shared<RectCollider>();
 	collider->SetRectBounds(spriteRenderer->GetSprite()->getLocalBounds());
 	m_gameObject->AddComponent(collider);
+
+	auto bindCollisionStart = std::bind(&BrickBehaviour::CollisionStarCallback, this, _1);
+	collider->OnCollisionStart = bindCollisionStart;
+}
+
+void BrickBehaviour::CollisionStarCallback(std::shared_ptr<Collider> other)
+{
+	auto ball = other->GetGameObject()->GetComponent<BallBehaviour>();
+	if (!ball)
+	{
+		return;
+	}
+	m_gameObject->GetComponent<Collider>()->m_isActive = false;
+	m_gameObject->GetComponent<SpriteRenderer>()->GetSprite()->setColor(sf::Color::Transparent);
+
 }

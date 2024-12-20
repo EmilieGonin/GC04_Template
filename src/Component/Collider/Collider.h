@@ -16,6 +16,7 @@ public:
     virtual void Update() = 0;
     virtual void Start() override;
 
+    bool m_isActive;
     std::shared_ptr<TransformSFML> GetTransform();
 
     std::function<void(std::shared_ptr<Collider>)> OnCollisionStart;
@@ -24,6 +25,7 @@ public:
 private:
     std::vector<std::shared_ptr<Collider>> m_currentCollisions;
     float m_radius;
+
 protected:
     std::shared_ptr<TransformSFML> m_transform;
 

@@ -55,6 +55,7 @@ void App::Init()
 
 void App::InitScene()
 {
+
 	m_scene = std::shared_ptr<Scene>(new Scene());
 	m_scene->InstanciateBackground(m_window->getView().getSize());
 	m_scene->InstanciateColonBricks(5, 10, m_window->getView().getSize().x);
